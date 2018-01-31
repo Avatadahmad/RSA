@@ -27,14 +27,18 @@ function tree = decision_tree_learning(examples, attributes ,binary_targets)
     attributes(best_attribute)=0;
     % If the left subset is empty, then return a empty leaf node.
     if (isempty(left_examples))
-        left_tree = {};
+        left_tree.op = [];
+        left_tree.kids = {};
+        left_tree.class = mode(binary_labels);
     else
         left_tree = decision_tree_learning(left_examples,attributes,left_targets);
     end
     
     % If the right subset is empty, then return a empty right node.
     if (isempty(right_subset))
-        right_tree = {};
+        right_tree.op = [];
+        right_tree.kids = {};
+        right_tree.class = mode(binary_labels);
     else
         right_tree = decision_tree_learning(right_examples,attributes,right_targets);
     end
