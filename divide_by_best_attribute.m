@@ -1,0 +1,2 @@
+% divide the examples and binary_targets into two subsets according to the best attribute 
+function  [left_examples, left_targets, right_examples, right_targets] = divide_by_best_attribute(best_attribute, examples,binary_targets)

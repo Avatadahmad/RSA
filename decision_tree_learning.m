@@ -22,7 +22,7 @@ function tree = decision_tree_learning(examples, attributes ,binary_targets)
     % return the index of the best attribute
     best_attribute = choose_best_decision_attribute(examples, attributes,binary_targets);
     % divide the examples and binary_targets into two subsets according to the best attribute 
-    [left_examples, left_targets, right_examples, right_targets] = divide_by_best_feature(best_attribute, examples,binary_targets);
+    [left_examples, left_targets, right_examples, right_targets] = divide_by_best_attribute(best_attribute, examples,binary_targets);
     % set the best attribute to 0 so that we would not reuse it later.
     attributes(best_attribute)=0;
     % If the left subset is empty, then return a empty leaf node.
