@@ -7,12 +7,7 @@
 ## Dongming
 
 - [x] Implement function `divide_by_best_attribute`
-
-- [x] Tree visualisation
-
-      *run `visualise_demo` to visualize the tree*
-
-
+- [x] Tree visualisation (run `visualise_demo` to visualize the tree)
 - [ ] Evaluate
 
 ## Even
