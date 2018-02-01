@@ -9,7 +9,7 @@ function entropy = calculate_entropy(binary_labels)
     positives = length(find(binary_labels==1));
     negatives = label_size - positives;
 
-    positive_raito = positives/label_size;
+    positive_ratio = positives/label_size;
     negative_raito = negatives/label_size;
 
     if (positives == 0 || negatives == 0)

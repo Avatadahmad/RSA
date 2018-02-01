@@ -11,10 +11,11 @@ for i=1:size(attributes)
         continue;
     end
     
-    binary_column = examples(i,:);
+    binary_row = examples(i,:);
 % calculate entropy of binary value true and false to get informatoin gain
-    entropy = calculate_entropy(binary_column);
-    info_gain(i) = entropySet - entropy;
+    entropy1 = calculate_entropy(binary_row);
+    entropy0 = calculate_entorpy(binary_targets(i));
+    info_gain(i) = entropySet - entropy1 - entropy0;
 end
 
 current_best = 0;
