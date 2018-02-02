@@ -5,10 +5,10 @@
 function tree = decision_tree_learning(examples, attributes ,binary_targets)
 
     % if all examples have the same value of binary_targets, then return a leaf node with this value
-    if(length(unique(binary_labels))==1)
+    if(length(unique(binary_targets))==1)
         tree.op=[];
         tree.kids={};
-        tree.class=unique(binary_labels);
+        tree.class=unique(binary_targets);
         return;
     end
     
@@ -16,7 +16,7 @@ function tree = decision_tree_learning(examples, attributes ,binary_targets)
     if(all(attributes==0))
         tree.op = [];
         tree.kids = {};
-        tree.class = mode(binary_labels);
+        tree.class = mode(binary_targets);
         return;
     end
     % return the index of the best attribute
@@ -29,7 +29,7 @@ function tree = decision_tree_learning(examples, attributes ,binary_targets)
     if (isempty(left_examples))
         left_tree.op = [];
         left_tree.kids = {};
-        left_tree.class = mode(binary_labels);
+        left_tree.class = mode(binary_targets);
     else
         left_tree = decision_tree_learning(left_examples,attributes,left_targets);
     end
@@ -38,7 +38,7 @@ function tree = decision_tree_learning(examples, attributes ,binary_targets)
     if (isempty(right_subset))
         right_tree.op = [];
         right_tree.kids = {};
-        right_tree.class = mode(binary_labels);
+        right_tree.class = mode(binary_targets);
     else
         right_tree = decision_tree_learning(right_examples,attributes,right_targets);
     end

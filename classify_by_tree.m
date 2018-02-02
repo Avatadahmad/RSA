@@ -7,16 +7,13 @@ function result = classify_by_tree(attributes, tree)
             return
         end
         
-        attribute_id = tree.op(1,1);        
-        left = tree.kids{1};
-        right = tree.kids{2};
-              
+        attribute_id = tree.op(1,1);                      
         value = attributes(attribute_id);
         
         if (value == 0)
-           result = classify_by_tree(attributes, left);
+           result = classify_by_tree(attributes, tree.kids{1};);
         else
-           result = classify_by_tree(attributes, right);
+           result = classify_by_tree(attributes, tree.kids{2};);
         end       
 end
 
