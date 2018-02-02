@@ -5,24 +5,26 @@ function best_attribute = choose_best_decision_attribute(examples, attributes,bi
 
 entropySet = calculate_entropy(binary_targets);
 
+    
 % if attribute used, skip calculation of information gain
-for i=1:size(attributes)
+for i=1:length(attributes)
     if attributes(i) == 0
         continue;
     end
     
-    binary_column = examples(i,:);
+    binary_column = examples(:,i);
 % calculate entropy of binary value true and false to get informatoin gain
     entropy = calculate_entropy(binary_column);
     info_gain(i) = entropySet - entropy;
 end
 
-current_best = 0;
+current_best = 1;
 
 for j=1:length(info_gain)
-    if info_gain(j) > current_best
+    if info_gain(j) > info_gain(current_best)
         current_best = j;
     end
 end
 
 best_attribute = current_best;
+return;
