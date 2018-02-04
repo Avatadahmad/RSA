@@ -10,12 +10,12 @@ entropySet = calculate_entropy(binary_targets);
 for i=1:length(attributes)
     if attributes(i) == 0
         info_gain(i)= NaN;
-        continue;
     else
         binary_column = examples(:,i);
-    % calculate entropy of binary value true and false to get informatoin gain
-        entropy = calculate_entropy(binary_column);
-        info_gain(i) = entropySet - entropy;
+  
+    % calculate remainder of binary value true and false to get informatoin gain
+        remainder = calculate_remainder(binary_column, binary_targets);
+        info_gain(i) = entropySet - remainder;
     end
 end
 
