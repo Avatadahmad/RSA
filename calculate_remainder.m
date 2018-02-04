@@ -9,6 +9,9 @@ p_0 = 0;
 n_1 = 0;
 p_1 = 0;
 
+binary_positive=[];
+binary_negative=[];
+
 for i=1:length(negatives)
     binary_negative(i)=binary_labels(negatives(i));
     if binary_labels(negatives(i))==0

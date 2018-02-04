@@ -9,7 +9,7 @@ entropySet = calculate_entropy(binary_targets);
 % if attribute used, skip calculation of information gain
 for i=1:length(attributes)
     if attributes(i) == 0
-        info_gain(i)= NaN;
+        info_gain(i)= -1;
     else
         binary_column = examples(:,i);
   
@@ -21,7 +21,7 @@ end
 
 current_best = 1;
 for j=1:length(info_gain)
-    if isnan(info_gain(j))==true
+    if (info_gain(j)==-1)
         continue;
     else
         if info_gain(j) > info_gain(current_best)
