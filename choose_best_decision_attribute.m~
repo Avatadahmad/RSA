@@ -21,11 +21,13 @@ end
 
 current_best = 1;
 for j=1:length(info_gain)
-    if isnan(info_gain(j))==true
+    if is_nan(info_gain(j)==true
         continue;
     else
         if info_gain(j) > info_gain(current_best)
             current_best = j;
+        else
+            continue;
         end
     end
 end
