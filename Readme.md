@@ -2,7 +2,7 @@
 
 ## Angie, Richard 
 
-- [ ] Implement function `choose_best_decision_attribute`
+- [x] Implement function `choose_best_decision_attribute`
 
 ## Dongming
 
@@ -14,3 +14,4 @@
 
 - [x] Algorithm framework
 - [ ] Test_trees
+

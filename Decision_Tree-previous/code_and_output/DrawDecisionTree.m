@@ -14,7 +14,7 @@ function DrawDecisionTree(tree,titletext)
 %   This file is part of the GPLAB toolbox.
 
 
-
+figure(2)
 % Set tree titles
 if nargin < 2
     titletext = 'Decision Tree found';

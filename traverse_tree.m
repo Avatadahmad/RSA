@@ -1,10 +1,11 @@
-function  nodes_to_plot = traverse_tree(tree,parent)
+function  nodes_to_plot = traverse_tree(tree)
 %UNTITLED4 Summary of this function goes here
 global tree_nodes;
 tree_nodes = {{0,tree}};
-traverse_tree_sub(tree,parent);
-nodes_to_plot = zeros(1,49);
-for i = 1:49
+traverse_tree_sub(tree,1);
+node_number = length(tree_nodes)
+nodes_to_plot = zeros(1,node_number);
+for i = 1:node_number
 	nodes_to_plot(i)=tree_nodes{i}{1};
 end
 end
