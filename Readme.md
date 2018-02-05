@@ -1,3 +1,10 @@
+# Usage
+
+```matlab
+>> tree=train_tree(1); % the target label you want to train
+>> visualise(tree)
+```
+
 # Tasks
 
 ## Angie, Richard 
