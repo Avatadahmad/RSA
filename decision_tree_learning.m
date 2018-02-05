@@ -33,6 +33,15 @@ function tree = decision_tree_learning(examples, attributes ,binary_targets)
         left_tree.class = mode(binary_targets);
     else
         left_tree = decision_tree_learning(left_examples,attributes,left_targets);
+        if ~isempty(left_tree.kids)
+            if and(~isempty(left_tree.kids{1}.class), ~isempty(left_tree.kids{2}.class))    
+                if left_tree.kids{1}.class==left_tree.kids{2}.class
+                    left_tree.class = left_tree.kids{1}.class;
+                    left_tree.kids = {};
+                    left_tree.op = [];
+                end
+            end
+        end
     end
     
     % If the right subset is empty, then return a empty right node.
@@ -42,6 +51,15 @@ function tree = decision_tree_learning(examples, attributes ,binary_targets)
         right_tree.class = mode(binary_targets);
     else
         right_tree = decision_tree_learning(right_examples,attributes,right_targets);
+        if ~isempty(right_tree.kids)
+            if and(~isempty(right_tree.kids{1}.class), ~isempty(right_tree.kids{2}.class))    
+                if right_tree.kids{1}.class==right_tree.kids{2}.class
+                    right_tree.class = right_tree.kids{1}.class;
+                    right_tree.kids = {};
+                    right_tree.op = [];
+                end
+            end
+        end
     end
     
     tree.op = best_attribute;
