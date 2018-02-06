@@ -5,43 +5,41 @@
 >> visualise(tree)
 ```
 
-# Tasks
+# Assignment
 
-=== First Iteration.
+## First Iteration
 
-## Angie,
+### Angie
 - [x] Implement Calculate_remainder
 - [x] Debug previous issues
 
-## Richard 
+### Richard 
 - [x] Implement function `choose_best_decision_attribute`
 
-## Dongming
+### Dongming
 
 - [x] Implement function `divide_by_best_attribute`
 - [x] Tree visualisation
 - [x] Merge the redundant branches (not affecting the classification accuracy)
 
-## Even
+### Even
 - [x] Algorithm framework
 
 
-=== Second Iteration.
+## Second Iteration
 
-## Angie
-- [] Write code to generate F1-measure，Confunsion_matrix,etc
+### Angie
+- [ ] Write code to generate F1-measure，Confunsion_matrix,etc
 
-## Dongming
-- [] Write code to do cross-validation 
-  (divide data into train_set, test_set, called test_trees to give result)
+### Dongming
+- [ ] Write code to do cross-validation (divide data into train_set, test_set, called test_trees to give result)
 
-## Richard
-- [] Do data pre-processing
+### Richard
+- [ ] Do data pre-processing
 
-## Even
-- [] implement test_trees
-- [] Write code to generate F1-measure，Confunsion_matrix,etc
-
+### Even
+- [ ] Implement test_trees
+- [ ] Write code to generate F1-measure，Confunsion_matrix,etc
 
 
 
