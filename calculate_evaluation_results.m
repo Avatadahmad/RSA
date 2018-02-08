@@ -8,6 +8,9 @@ for i=1:6
     %the diagonal value will be TP for each class
     TP = confusion_matrix(i,i);
     
+    %the rest of the diagonal will be TN
+    TN = trace(confusion_matrix)-TP;
+    
     %calculate the sum of each row and store in a column matrix
     sum_of_rows = sum(confusion_matrix,2);
     %FN will be the difference between sum and TP
@@ -18,14 +21,19 @@ for i=1:6
     %FP will be the difference between sum and TP
     FP = sum_of_columns(1,i)-TP;
     
+    
+    
     recall_rate = TP/(TP+FN);
     precision_rate = TP/(TP+FP);
     
     F1 = (2* precision_rate* recall_rate)/(precision_rate+recall_rate);
     
+    classification_rate = (TP+TN)/(TP+TN+FP+FN);
+    
     evaluation_results(i,1) =  recall_rate;
     evaluation_results(i,2) = precision_rate;
     evaluation_results(i,3) = F1;
+    evaluation_results(i,4) = classification_rate;
     
 end
     
