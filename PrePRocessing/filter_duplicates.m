@@ -1,11 +1,11 @@
 % outputs the row numbers with same patterns, those in same row mean same
 % pattern
 
-%function new_filter_res(x, y)
+function [x,y] = filter_duplicates(x, y)
 
-    clc;
-    clear all;
-    load('noisydata_students.mat');
+  %  clc;
+  %  clear all;
+  %  load('noisydata_students.mat');
 
     [ROW, COL] = size(x);
     x_change = x;
@@ -22,7 +22,7 @@
 
             for index_change1 = 1:COL
                 out_x_change(1, index_change1) = x_change(i, index_change1); % stores current row in var
-                x_change(i, index_change1) = "a"; % deletes current row off of data
+                x_change(i, index_change1) = NaN; % deletes current row off of data
             end
 
             % outputs row number that was searched to filtered_output array
@@ -45,10 +45,14 @@
                        filtered_output(row_counter, col_counter) = j;
 
                        for index_change2 = 1:COL
-                           x_change(j, index_change2) = "a"; % deletes same row off of data
+                           x_change(j, index_change2) = NaN; % deletes same row off of data
                        end
                     end
                 end
             end
 
     end
+    
+    [x,y] = smooth_data(x, y, filtered_output);
+    
+end

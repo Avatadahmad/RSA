@@ -1,6 +1,6 @@
 % takes binary labels
 
-%function smooth_data(x, y, filtered_output)
+function [x,y] = smooth_data(x, y, filtered_output)
 
     rng('shuffle');
     [ROW, COL] = size(filtered_output); 
@@ -84,9 +84,9 @@
             j = 2;
             while j <= COL && filtered_output(i, j) ~= 0
                 for index = 1:COL
-                    x(filtered_output(i,j), index) = "a";
+                    x(filtered_output(i,j), index) = NaN;
                 end
-                    y(filtered_output(i,j)) = "a"; 
+                    y(filtered_output(i,j)) = NaN; 
                     
                     %bug below
                     y(i) = adjusted_y;
@@ -95,4 +95,4 @@
         end
     end
     
-    %end
+end
