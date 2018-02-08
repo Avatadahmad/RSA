@@ -1,7 +1,8 @@
-function recall_and_precision = calculate_recall_and_precision(confusion_matrix)
+function evaluation_results = calculate_evaluation_results(confusion_matrix)
 
-%initialise the recall and precision rate table
-recall_and_precision = zeros(6,2);
+%initialise a matrix to record recall_rate, precision_rate, F1 and
+%classification_rate
+evaluation_results = zeros(6,4);
 
 for i=1:6
     %the diagonal value will be TP for each class
@@ -20,8 +21,12 @@ for i=1:6
     recall_rate = TP/(TP+FN);
     precision_rate = TP/(TP+FP);
     
-    recall_and_precision(i,1) =  recall_rate;
-    recall_and_precision(i,2) = precision_rate;
+    F1 = (2* precision_rate* recall_rate)/(precision_rate+recall_rate);
+    
+    evaluation_results(i,1) =  recall_rate;
+    evaluation_results(i,2) = precision_rate;
+    evaluation_results(i,3) = F1;
+    
 end
     
     
