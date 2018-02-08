@@ -11,9 +11,9 @@ function result = classify_by_tree(attributes, tree)
         value = attributes(attribute_id);
         
         if (value == 0)
-           result = classify_by_tree(attributes, tree.kids{1};);
+           result = classify_by_tree(attributes, tree.kids{1});
         else
-           result = classify_by_tree(attributes, tree.kids{2};);
+           result = classify_by_tree(attributes, tree.kids{2});
         end       
 end
 
