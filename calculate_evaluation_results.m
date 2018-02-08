@@ -2,9 +2,10 @@ function evaluation_results = calculate_evaluation_results(confusion_matrix)
 
 %initialise a matrix to record recall_rate, precision_rate, F1 and
 %classification_rate
-evaluation_results = zeros(6,4);
+[num_row,~] = size(confusion_matrix);
+evaluation_results = zeros(num_row,4);
 
-for i=1:6
+for i=1:num_row
     %the diagonal value will be TP for each class
     TP = confusion_matrix(i,i);
     
@@ -20,8 +21,6 @@ for i=1:6
     sum_of_columns = sum(confusion_matrix,1);
     %FP will be the difference between sum and TP
     FP = sum_of_columns(1,i)-TP;
-    
-    
     
     recall_rate = TP/(TP+FN);
     precision_rate = TP/(TP+FP);
