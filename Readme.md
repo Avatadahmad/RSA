@@ -35,7 +35,7 @@
 
 ### Dongming
 - [ ] Write code to do cross-validation 
-	 (output: a matrix with two rows; one is actural result and other one is predicted result)
+	 (output: a matrix with two rows; one is actural result and other one is predicted result + 10 trees)
 	 (divide data into train_set, test_set, called test_trees to give result)
 
 ### Richard
