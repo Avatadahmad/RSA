@@ -1,57 +1,47 @@
-clear
-load('Data/cleandata_students.mat')
+clear('all');
+load('Data/cleandata_students.mat');
+% load('Data/noisydata_students.mat');
 
+[~, total_feature_count] = size(x);
+attributes = ones(1,total_feature_count);
+
+% 10-fold cross validation starting
+evaluation_results = zeros(6,4);
+for fold_number=1:10
+    % create 6 trees for each fold
+    tree=struct('op',0,'class',0,'kids',{0});
+    tree(6) = tree(1);
+    % prepare training data and test data for the current fold
+    [training_features,training_binary_targets,test_features,test_targets] = get_cross_validation_data(fold_number,x,y);
+    for i=1:6
+        tree(i) = decision_tree_learning(training_features, attributes ,training_binary_targets(:,i));
+    end
+    % now we have 6 trees, evaluate here
+    predictions = test_trees(tree, test_features);
+    prediction_actual_record = [predictions test_targets];
+    confusion_matrix = calculate_confusion_matrix(prediction_actual_record,6);
+    evaluation_results = evaluation_results + calculate_evaluation_results(confusion_matrix);
+end
+evaluation_results = evaluation_results / 10
+
+
+% subfunction
+function [training_features,training_binary_targets,test_features,test_targets] = get_cross_validation_data(fold_number,x,y)
 % generate binary targets for 6 emotions, stored in 1004-by-6
 binary_targets = [];
 for i = 1:6
-	binary_targets = [binary_targets (y == i)];
-end
-[total_sample_count, total_feature_count] = size(x);
-attributes = ones(1,total_feature_count);
-
-% partition the data into 10 folds
-global feature_blocks;
-global binary_targets_blocks;
-feature_blocks = cell(10,1);
-binary_targets_blocks = cell(10,1);
-j = 0;
-for i=1:9
-	feature_blocks{i} = x(j+1:j+floor(total_sample_count/10),:);
-	binary_targets_blocks{i} = binary_targets(j+1:j+floor(total_sample_count/10),:);
-	j=j+floor(total_sample_count/10);
-end
-feature_blocks{10}=x(j+1:total_sample_count,:);
-binary_targets_blocks{10}=binary_targets(j+1:total_sample_count,:);
-
-% trees = {struct};
-% 10-fold cross validation starting
-for fold_number=1:10  
-	% create 6 trees for each fold
-	tree=struct('op',0,'class',0,'kids',{0});
-	tree(6)=tree(1);
-	% prepare training data and test data for the current fold
-	[features_to_train,binary_targets_to_train,features_to_test,binary_targets_to_test] = get_cross_validation_data(fold_number);
-	for i=1:6
-		tree(i) = decision_tree_learning(features_to_train, attributes ,binary_targets_to_train(:,i));
-	end
-	% now we have 6 trees, evaluate here
-
+    binary_targets = [binary_targets (y == i)];
 end
 
-function [training_features,training_targets,test_features,test_targets] = get_cross_validation_data(fold_number)
-	global feature_blocks;
-	global binary_targets_blocks;
+[total_sample_count, ~] = size(x);
+if fold_number<10
+    test_data_range = [100*(fold_number-1)+1,100*fold_number];
+else
+    test_data_range = [100*(fold_number-1)+1,total_sample_count];
+end
 
-	% get trainging data
-	training_features = feature_blocks;
-	training_features(fold_number)=[];
-	training_features = cell2mat(training_features);
-
-	training_targets = binary_targets_blocks;
-	training_targets(fold_number)=[];
-	training_targets = cell2mat(training_targets);
-
-	% get test data
-	test_features = feature_blocks{fold_number};
-	test_targets = binary_targets_blocks{fold_number};
+test_features = x(test_data_range(1):test_data_range(2),:);
+test_targets = y(test_data_range(1):test_data_range(2),:);
+training_features = [x(1:test_data_range(1)-1,:);x(test_data_range(2)+1:total_sample_count,:)];
+training_binary_targets = [binary_targets(1:test_data_range(1)-1,:);binary_targets(test_data_range(2)+1:total_sample_count,:)];
 end
