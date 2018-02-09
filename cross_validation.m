@@ -34,10 +34,11 @@ for i = 1:6
 end
 
 [total_sample_count, ~] = size(x);
+fold_size = floor(total_sample_count/10);
 if fold_number<10
-    test_data_range = [100*(fold_number-1)+1,100*fold_number];
+    test_data_range = [fold_size*(fold_number-1)+1,fold_size*fold_number];
 else
-    test_data_range = [100*(fold_number-1)+1,total_sample_count];
+    test_data_range = [fold_size*(fold_number-1)+1,total_sample_count];
 end
 
 test_features = x(test_data_range(1):test_data_range(2),:);
