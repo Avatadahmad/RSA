@@ -3,13 +3,14 @@
 % The input is a array T contains 6 decision trees, 
 % and a features example x2 need to be tested
 function predictions = test_trees(T, x2)
-    results = zeros(1,6);
     [example_size,~] = size(x2);
     predictions = zeros(1,example_size);
     
     for x = 1:example_size
+        results = zeros(1,6);
+        
         for i = 1:6
-            results(i) = classify_by_tree(x2,T(i));
+            results(i) = classify_by_tree(x2(x,:),T(i));
         end
 
         % Get index of positive results
