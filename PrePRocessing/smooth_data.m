@@ -1,6 +1,6 @@
 % takes binary labels
 
-%function smooth_data(x, y, filtered_output)
+function [x,y] = smooth_data(x, y, filtered_output)
 
     rng('shuffle');
     [ROW, COL] = size(filtered_output); 
@@ -95,4 +95,4 @@
         end
     end
     
-    %end
+end

@@ -1,11 +1,7 @@
 % outputs the row numbers with same patterns, those in same row mean same
 % pattern
 
-%function new_filter_res(x, y)
-
-%     clc;
-%     clear all;
-%     load('noisydata_students.mat');
+function [x,y] = filter_duplicates(x, y)
 
     [ROW, COL] = size(x);
     x_change = x;
@@ -52,3 +48,7 @@
             end
 
     end
+    
+    [x,y] = smooth_data(x, y, filtered_output);
+    
+end
