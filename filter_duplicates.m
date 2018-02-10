@@ -50,7 +50,7 @@ function [x,y] = filter_duplicates(x, y)
     end
     
     [x,y] = smooth_data(x, y, filtered_output);
-    x(any(isnan(x), 2),:) = [];
-    y(any(isnan(y), 2),:) = [];
+%     x(any(isnan(x), 2),:) = [];
+%     y(any(isnan(y), 2),:) = [];
     
 end

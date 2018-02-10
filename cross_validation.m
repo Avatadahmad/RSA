@@ -1,12 +1,16 @@
-function cross_validation(x,y)
-% load('Data/cleandata_students.mat');
-% load('Data/noisydata_students.mat');
+function [evaluation_results,average_cross_validation] = cross_validation(x,y)
+   
+% load('Data/noisydata_students.mat');   
+% load('Data/cleandata_students.mat'); 
 
 [~, total_feature_count] = size(x);
 attributes = ones(1,total_feature_count);
 
 % 10-fold cross validation starting
 evaluation_results = zeros(6,4);
+
+% average cross validation
+average_cross_validation = zeros(6,6);
 for fold_number=1:10
     % create 6 trees for each fold
     tree=struct('op',0,'class',0,'kids',{0});
@@ -20,10 +24,11 @@ for fold_number=1:10
     predictions = test_trees(tree, test_features);
     prediction_actual_record = [predictions test_targets];
     confusion_matrix = calculate_confusion_matrix(prediction_actual_record,6);
+    average_cross_validation = average_cross_validation + confusion_matrix;
     evaluation_results = evaluation_results + calculate_evaluation_results(confusion_matrix);
 end
-evaluation_results = evaluation_results / 10
-
+evaluation_results = evaluation_results / 10;
+average_cross_validation = average_cross_validation;
 
 % subfunction
 function [training_features,training_binary_targets,test_features,test_targets] = get_cross_validation_data(fold_number,x,y)
