@@ -1,8 +1,9 @@
-function visualise(tree)
+function visualise(tree,tree_number)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
-fig_tree = figure(1);
+fig_tree = figure();
 clf(fig_tree)
+title(['Tree' num2str(tree_number)],'fontsize',16)
 global tree_nodes;
 nodes_to_plot = traverse_tree(tree);
 nodes_for_treeplot = nodes_to_plot(1,:);
@@ -42,10 +43,10 @@ leaf_nodes_1 = find(nodes_to_plot(3,:)==1);
 internal_nodes = find(~isnan(nodes_to_plot(2,:))); 
 % plot(x(internal_nodes), y_new(internal_nodes), 'ws','MarkerFaceColor','w');
 % hold on
-plot(x(leaf_nodes_0), y_new(leaf_nodes_0), 'o','color',[0.961, 0.263, 0.212],'MarkerFaceColor',[0.961, 0.263, 0.212]);
+positive_nodes = plot(x(leaf_nodes_0), y_new(leaf_nodes_0), 'o','color',[0.961, 0.263, 0.212],'MarkerFaceColor',[0.961, 0.263, 0.212]);
 hold on
-plot(x(leaf_nodes_1), y_new(leaf_nodes_1), 'o','color',[0.000, 0.588, 0.529],'MarkerFaceColor',[0.000, 0.588, 0.529]);
-
+negative_nodes = plot(x(leaf_nodes_1), y_new(leaf_nodes_1), 'o','color',[0.000, 0.588, 0.529],'MarkerFaceColor',[0.000, 0.588, 0.529]);
+legend([positive_nodes,negative_nodes],'positive', 'negative', 'location','SouthEast');
 
 for t=1:length(nodes_for_treeplot)
     if isempty(tree_nodes{t}{2}.class)
