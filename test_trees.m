@@ -21,7 +21,7 @@ function predictions = test_trees(T, x2)
         else
              % otherwise, pick one number from the positives  
             result_index = round(rand(1,1)*(length(positives)-1))+1;
-            disp(result_index)
+            % disp(result_index)
             predictions(x) = positives(result_index);
         end
     end   
