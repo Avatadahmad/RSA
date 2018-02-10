@@ -24,9 +24,12 @@ for i=1:num_row
     
     recall_rate = TP/(TP+FN);
     precision_rate = TP/(TP+FP);
-    
     F1 = (2* precision_rate* recall_rate)/(precision_rate+recall_rate);
-    
+    if(isnan(F1))
+        F1 = 0;
+    end    
+
+
     classification_rate = (TP+TN)/(TP+TN+FP+FN);
     
     evaluation_results(i,1) =  recall_rate;

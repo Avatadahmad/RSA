@@ -1,13 +1,28 @@
-function [evaluation_results,average_confusion_matrix,average_classification_rate] = cross_validation(x,y)
+function [evaluation_results,average_confusion_matrix,average_classification_rate] = cross_validation(data_type)
+
+ if string(data_type) ==string('clean')
+     load('Data/cleandata_students.mat');
+ elseif  string(data_type)==string('noisy')
+     load('Data/noisydata_students.mat');
+ elseif  string(data_type)==string('processed_noisy')
+     load('Data/noisydata_students.mat');
+     [x,y] = filter_duplicates(x,y);
+ else    
+     disp('Error! Usage: cross_validation(data_type)');
+     return;
+ end
    
 % load('Data/noisydata_students.mat');   
-load('Data/cleandata_students.mat'); 
+% 
 
 [~, total_feature_count] = size(x);
 attributes = ones(1,total_feature_count);
 
 % average confusion matrix
 average_confusion_matrix = zeros(6,6);
+
+% average classification_rate of the whole model
+average_classification_rate = 0;
 
 % 10-fold cross validation starting
 evaluation_results = zeros(6,4);
@@ -25,10 +40,16 @@ for fold_number=1:10
     prediction_actual_record = [predictions test_targets];
     confusion_matrix = calculate_confusion_matrix(prediction_actual_record,6);
     evaluation_results = evaluation_results + calculate_evaluation_results(confusion_matrix);
+    classification_rate = get_classification_rate(confusion_matrix);
+    average_classification_rate = average_classification_rate + classification_rate;
     average_confusion_matrix = average_confusion_matrix + confusion_matrix;
 end
+disp(evaluation_results);
 evaluation_results = evaluation_results / 10;
-average_classification_rate = get_classification_rate(average_confusion_matrix);
+% Get the average value of the classification results
+evaluation_results(7,:) = mean(evaluation_results);
+average_classification_rate = average_classification_rate/10;
+average_confusion_matrix = average_confusion_matrix/10;
 end
 
 
@@ -54,12 +75,12 @@ training_features = [x(1:test_data_range(1)-1,:);x(test_data_range(2)+1:total_sa
 training_binary_targets = [binary_targets(1:test_data_range(1)-1,:);binary_targets(test_data_range(2)+1:total_sample_count,:)];
 end
 
-function average_classification_rate = get_classification_rate(average_confusion_matrix)
-        [row,~] = size(average_confusion_matrix);
-        total = sum(sum(average_confusion_matrix));
+function classification_rate = get_classification_rate(confusion_matrix)
+        [row,~] = size(confusion_matrix);
+        total = sum(sum(confusion_matrix));
         correct_result = 0;
         for x = 1:row
-           correct_result = correct_result + average_confusion_matrix(x,x);
+           correct_result = correct_result + confusion_matrix(x,x);
         end
-        average_classification_rate = correct_result/total;
+        classification_rate = correct_result/total;
 end
