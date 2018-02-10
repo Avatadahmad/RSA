@@ -1,5 +1,5 @@
-clear('all');
-load('Data/cleandata_students.mat');
+function cross_validation(x,y)
+% load('Data/cleandata_students.mat');
 % load('Data/noisydata_students.mat');
 
 [~, total_feature_count] = size(x);
@@ -45,4 +45,6 @@ test_features = x(test_data_range(1):test_data_range(2),:);
 test_targets = y(test_data_range(1):test_data_range(2),:);
 training_features = [x(1:test_data_range(1)-1,:);x(test_data_range(2)+1:total_sample_count,:)];
 training_binary_targets = [binary_targets(1:test_data_range(1)-1,:);binary_targets(test_data_range(2)+1:total_sample_count,:)];
+end
+
 end
