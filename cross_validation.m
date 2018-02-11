@@ -44,7 +44,6 @@ for fold_number=1:10
     average_classification_rate = average_classification_rate + classification_rate;
     average_confusion_matrix = average_confusion_matrix + confusion_matrix;
 end
-disp(evaluation_results);
 evaluation_results = evaluation_results / 10;
 % Get the average value of the classification results
 evaluation_results(7,:) = mean(evaluation_results);
