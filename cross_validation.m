@@ -12,9 +12,6 @@ function [evaluation_results,average_confusion_matrix,average_classification_rat
      return;
  end
    
-% load('Data/noisydata_students.mat');   
-% 
-
 [~, total_feature_count] = size(x);
 attributes = ones(1,total_feature_count);
 
