@@ -33,11 +33,11 @@ for fold_number=1:10
         tree(i) = decision_tree_learning(training_features, attributes ,training_binary_targets(:,i));
     end
     % now we have 6 trees, evaluate here
-    predictions = test_trees(tree, test_features);
+    predictions = test_trees_alternative(tree, test_features);
     prediction_actual_record = [predictions test_targets];
     confusion_matrix = calculate_confusion_matrix(prediction_actual_record,6);
     evaluation_results = evaluation_results + calculate_evaluation_results(confusion_matrix);
-    classification_rate = get_classification_rate(confusion_matrix);
+    classification_rate = calculate_model_classification_rate(confusion_matrix);
     average_classification_rate = average_classification_rate + classification_rate;
     average_confusion_matrix = average_confusion_matrix + confusion_matrix;
 end
@@ -71,7 +71,10 @@ training_features = [x(1:test_data_range(1)-1,:);x(test_data_range(2)+1:total_sa
 training_binary_targets = [binary_targets(1:test_data_range(1)-1,:);binary_targets(test_data_range(2)+1:total_sample_count,:)];
 end
 
-function classification_rate = get_classification_rate(confusion_matrix)
+
+% This function is used to calcuate the model's classification rate based
+% on the  confusion matrix we get
+function classification_rate = calculate_model_classification_rate(confusion_matrix)
         [row,~] = size(confusion_matrix);
         total = sum(sum(confusion_matrix));
         correct_result = 0;

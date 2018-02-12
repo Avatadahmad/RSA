@@ -7,8 +7,9 @@ function predictions = test_trees(T, x2)
     predictions = zeros(1,example_size);
     
     for x = 1:example_size
-        results = zeros(1,6);
         
+        results = zeros(1,6);
+       
         for i = 1:6
             results(i) = classify_by_tree(x2(x,:),T(i));
         end

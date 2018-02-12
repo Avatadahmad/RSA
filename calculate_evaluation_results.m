@@ -28,10 +28,8 @@ for i=1:num_row
     if(isnan(F1))
         F1 = 0;
     end    
-
-
-    classification_rate = (TP+TN)/(TP+TN+FP+FN);
     
+    classification_rate = (TP+TN)/(TP+TN+FP+FN);    
     evaluation_results(i,1) =  recall_rate;
     evaluation_results(i,2) = precision_rate;
     evaluation_results(i,3) = F1;
