@@ -33,7 +33,7 @@ for fold_number=1:10
         tree(i) = decision_tree_learning(training_features, attributes ,training_binary_targets(:,i));
     end
     % now we have 6 trees, evaluate here
-    predictions = test_trees(tree, test_features);
+    predictions = testTrees(tree, test_features);
     prediction_actual_record = [predictions test_targets];
     confusion_matrix = calculate_confusion_matrix(prediction_actual_record,6);
     evaluation_results = evaluation_results + calculate_evaluation_results(confusion_matrix);

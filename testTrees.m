@@ -2,7 +2,7 @@
 % The final result is depended on all 6 trees.
 % The input is a array T contains 6 decision trees, 
 % and a features example x2 need to be tested
-function predictions = test_trees(T, x2)
+function predictions = testTrees(T, x2)
     [example_size,~] = size(x2);
     predictions = zeros(1,example_size);
     

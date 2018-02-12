@@ -25,6 +25,16 @@ for i=1:num_row
     recall_rate = TP/(TP+FN);
     precision_rate = TP/(TP+FP);
     F1 = (2* precision_rate* recall_rate)/(precision_rate+recall_rate);
+     
+    if(isnan(recall_rate))
+        recall_rate = 0;
+    end  
+    
+    if(isnan(precision_rate))
+        precision_rate = 0;
+    end 
+    
+     
     if(isnan(F1))
         F1 = 0;
     end    
